@@ -94,7 +94,7 @@ function tdcli_update_callback(data)
       if msg.content_.text == "pin" and msg.content_.reply_to_message_id_ ~= 0 then
 tdcli.pinChannelMessage(msg.content_.chat_id_, msg.content_.reply_to_message_id_, 1)
 tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>پیام پین شد</b>', 1, 'html')
-end
+
 	   --if msg.content_.text_ == "/id" then
         -- Reply with regular text
 		tdcli.sendText(msg.chat_id_, 0, 1, msg.chat_id_, 1, 'html')
@@ -237,7 +237,6 @@ tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
       --  tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
 				end
       end
-end
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
       ID="GetChats",
