@@ -36,7 +36,7 @@ sudo_users = {
 function is_mod(msg)
 local var = false
  -- — Check users id in config
-for v,user in mame:hset('mod'..msg.chat_id_, msg.sender_user_id_) do
+for v,user in mame:hget('mod'..msg.chat_id_, msg.sender_user_id_) do
 
  if user == msg.sender_user_id_ then
  var = true
@@ -124,10 +124,7 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re_ *Sudo*', 1, 'md')
 	elseif input:match('^/me$') and is_mod(msg) then
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re Group_ *Admin*', 1, 'md')
-		--elseif input:match('^مقام من$') and is_owner(msg) then
-		-- tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما رهبر گروه هستید_', 'md')
-				
-				
+			
 	elseif input:match('^/closechat') then
 		local text = input:gsub('/closechat', '')
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Are You Sure?_\nIf Yes type *yes*\nElse Type *no*', 1, 'md')
@@ -149,7 +146,7 @@ function tdcli_update_callback(data)
 			elseif input:match('^/promote$') and is_sudo(msg) then
 		local id = input:gsub('/promote', '')
 		text = id..'*Has Been Promoted!*'
-		mame:set('mods'..msg.chat_id_,id)
+		mame:set('mod'..msg.chat_id_,id)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	elseif input:match('^/promote$') and not is_sudo(msg) then
 		text = '*You,re Not Mod Or Sudo*'
