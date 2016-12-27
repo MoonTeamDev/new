@@ -191,7 +191,7 @@ function tdcli_update_callback(data)
   end
 				
 
-		--if input:match('^settings$') then
+		if input:match('^settings$') then
 			--if mame:get('lfwd:'..msg.chat_id_) then
 				--local lock_fwd = 'yes'
 			--elseif not mame:get('lfwd:'..msg.chat_id_) then
