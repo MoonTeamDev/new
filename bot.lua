@@ -109,7 +109,7 @@ function tdcli_update_callback(data)
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_If I,m Creator I,ve Send Gplink On Next Msg_', 1, 'md')
 			tdcli.exportChatInviteLink(msg.chat_id_)
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, msg.invite_link_, 1, 'md')
-			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'link: '..invite_link_, 1)
+			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '*Link:* '..ChatInviteLink, 1, 'md')
 		elseif input:match('^typing on$') then
 			hash = 'typing:'..msg.chat_id_
 			mame:set(hash,true)
