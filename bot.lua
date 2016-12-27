@@ -147,28 +147,16 @@ function tdcli_update_callback(data)
 			tdcli.getActiveSessions()
 		end
 	
------------------------------------------------------------------------
---lock
-	
---------------------##############################
---settings
-		local lfwd = 'lfwd:'..chat_id
+-----settings-----		
+local lfwd = 'lfwd:'..chat_id
      if mame:get(lfwd) then
-   lfwd = "Locked !"
+   lfwd = "Active"
    else 
-   lfwd = "Unlocked !"
+   lfwd = "DeActive"
   end
 				
 
-		if input:match('^/settings$') then
-			--if mame:get('lfwd:'..msg.chat_id_) then
-			--	local lock_fwd = 'yes'
-			--elseif not mame:get('lfwd:'..msg.chat_id_) then
-			--	local lock_fwd = 'no'
-			--elseif lock_fwd == nil then
-			--	local lock_fwd = 'undefined'
-			--end
-					
+		if input:match('^/settings$') then		
 text = '_Group '..msg.chat_id_..' Settings_\n______________\n\n*Forward:* _'..lfwd..'_'			
 tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
