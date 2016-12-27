@@ -134,7 +134,7 @@ function tdcli_update_callback(data)
 			elseif input:match('^/promote$') and is_sudo(msg) then
 		local id = input:gsub('/promote', '')
 		text = '_User_ *'..user_id..'* _Has Been Promoted!_'
-		mame:set('mod'..msg.chat_id_,id)
+		mame:set('mods'..msg.chat_id_,id)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	elseif input:match('^/promote$') and not is_sudo(msg) then
 		text = '*You,re Not Sudo*'
@@ -142,7 +142,7 @@ function tdcli_update_callback(data)
 				elseif input:match('^/demote$') and is_sudo(msg) then
 		local id = input:gsub('/demote', '')
 		text = '_User_ *'..user_id..'* _Has Been Demoted!_'
-		mame:del('mod'..msg.chat_id_,id)
+		mame:del('mods'..msg.chat_id_,id)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	elseif input:match('^/demote$') and not is_sudo(msg) then
 		text = '*You,re Not Sudo*'
