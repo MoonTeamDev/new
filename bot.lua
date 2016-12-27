@@ -158,7 +158,7 @@ function tdcli_update_callback(data)
                 elseif input:match('^/unlock cmd$') then
                          mame:del('lcmd:'..msg.chat_id_)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Cmd Has Been DeActivated_', 1, 'md')
-                elseif input:match('/') and mame:get('lcmd:'..msg.chat_id_) then
+                elseif input:match == ('/') and mame:get('lcmd:'..msg.chat_id_) then
                        tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
     end
 		if input:match('^/block') then
