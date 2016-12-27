@@ -26,7 +26,7 @@ function is_sudo(msg)
   return var
 end
 sudo_users = {
-  205906514,
+  90285047,
   0
 }
 -- Print callback
