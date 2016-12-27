@@ -198,35 +198,17 @@ function tdcli_update_callback(data)
    else 
    lfwd = "Unlocked !"
   end
-				local luser = 'luser'..chat_id
-     if mame:get(luser) then
-   luser = "Locked !"
-   else 
-   luser = "Unlocked !"
-  end
-				local luser = 'ltag'..chat_id
-			if mame:get(ltag) then
-   ltag = "Locked !"
-   else 
-   ltag = "Unlocked !"
-  end
-			if mame:get('lang'..chat_id,true) then
-   lang = "فارسی"
-   elseif not mame:get('lang'..chat_id,true) then 
-   lang = "English"
-  end
-		
+				
 
-		if input:match('^group settings$') then
-			--if mame:get('lfwd:'..msg.chat_id_) then
-			--	local lock_fwd = 'yes'
-			--elseif not mame:get('lfwd:'..msg.chat_id_) then
-			--	local lock_fwd = 'no'
-			--elseif lock_fwd == nil then
-			--	local lock_fwd = 'undefined'
-			--end
-					--🔹 -- Abi
-					--🔸 -- Narenji
+		if input:match('^settings$') then
+			if mame:get('lfwd:'..msg.chat_id_) then
+				local lock_fwd = 'yes'
+			elseif not mame:get('lfwd:'..msg.chat_id_) then
+				local lock_fwd = 'no'
+			elseif lock_fwd == nil then
+				local lock_fwd = 'undefined'
+			end
+					
 text = '_Group *'..msg.chat_id_..'* Settings_\n➖➖➖➖➖➖➖➖\n\n*Lock #fwd:*_'..lfwd..'_'			
 tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
@@ -236,9 +218,9 @@ tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
         --local text = input:gsub('addme', '')
 		--tdcli.addChatMember(text, msg.sender_user_id_, 20)
       -- And if content of the text is...
-      --elseif msg.content_.text_ == "PING" then
+      elseif msg.content_.text_ == "ping" then
         -- Reply with formatted text
-      --  tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
+        tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
 				end
       end
     end
