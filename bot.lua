@@ -36,7 +36,7 @@ sudo_users = {
 function is_mod(msg)
 local var = false
  -- — Check users id in config
-for k,v in pairs(redis:smember('mod'..msg.chat_id_)) do
+for k,v in pairs(mame:smember('mod'..msg.chat_id_)) do
 			
  if user == msg.sender_user_id_ then
  var = true
