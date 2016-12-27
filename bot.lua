@@ -152,13 +152,13 @@ function tdcli_update_callback(data)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Tag Has Been DeActivated_', 1, 'md')
                 elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) then
                        tdcli.deleteMessages(chat_id, {[0] = msg.id_})
-			elseif input:match('^/lock link$') then
-                         mame:set('llink:'..msg.chat_id_, true)
-                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Link Has Been Activated_', 1, 'md')
-                elseif input:match('^/unlock link$') then
-                         mame:del('llink:'..msg.chat_id_)
-                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Link Has Been DeActivated_', 1, 'md')
-                elseif input:match("^https://telegram.me/joinchat/%S+$") or ('^telegram.me$') and mame:get('llink:'..msg.chat_id_) then
+			elseif input:match('^/lock cmd$') then
+                         mame:set('lcmd:'..msg.chat_id_, true)
+                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Cmd Has Been Activated_', 1, 'md')
+                elseif input:match('^/unlock cmd$') then
+                         mame:del('lcmd:'..msg.chat_id_)
+                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Cmd Has Been DeActivated_', 1, 'md')
+                elseif input:match('/') and mame:get('lcmd:'..msg.chat_id_) then
                        tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
     end
 		if input:match('^/block') then
@@ -193,15 +193,15 @@ local ltag = 'ltag:'..chat_id
    ltag = "DeActive"
   end
 	
-local llink = 'llink:'..chat_id
-     if mame:get(llink) then
-   llink = "Active"
+local lcmd = 'lcmd:'..chat_id
+     if mame:get(lcmd) then
+   lcmd = "Active"
    else 
-   llink = "DeActive"
+   lcmd = "DeActive"
   end
 
 		if input:match('^/settings$') then		
-text = '_Settings:_\n➖➖➖➖➖\n*Forward:* _'..lfwd..'_\n*Username(@):* _'..luser..'_\n*Tag(#):* _'..ltag..'_\n*Link:* _'..llink..'_'			
+text = '_Settings:_\n➖➖➖➖➖\n*Forward:* _'..lfwd..'_\n*Username(@):* _'..luser..'_\n*Tag(#):* _'..ltag..'_\n*Cmd:* _'..lcmd..'_'			
 tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
