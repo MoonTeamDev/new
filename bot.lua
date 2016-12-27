@@ -136,7 +136,6 @@ function tdcli_update_callback(data)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock *Fwd* Has Been DeActivated_', 1, 'md')
 		elseif mame:get('lfwd:'..chat_id) and msg.forward_info_ then
 			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
-		end
 		elseif input:match('^/lock username$') then
       mame:set('luser:'..msg.chat_id_, true)
       tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated_', 1, 'md')
@@ -182,7 +181,6 @@ tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
       --  tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
 				end
       end
-end
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
       ID="GetChats",
