@@ -237,6 +237,7 @@ tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
       --  tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
 				end
       end
+end
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
       ID="GetChats",
