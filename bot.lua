@@ -35,7 +35,7 @@ sudo_users = {
 
 function is_mod(msg)
 local var = false
-if redis:hget('mod'..msg.chat_id_,msg.sender_user_id_) then
+if redis:mod('mod'..msg.chat_id_,msg.sender_user_id_) then
 var = true
 end
 return var
