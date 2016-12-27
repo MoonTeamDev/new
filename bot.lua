@@ -33,6 +33,14 @@ sudo_users = {
   0
 }
 
+function is_mod(msg)
+local var = false
+if mame:sismember('mod'..msg.chat_id_,msg.sender_user_id_) then
+var = true
+end
+return var
+end
+
 -- Print message format. Use serpent for prettier result.
 function vardump(value, depth, key)
   local linePrefix = ''
