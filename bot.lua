@@ -80,7 +80,7 @@ function tdcli_update_callback(data)
       -- And content of the text is...
       if msg.content_.text_ == "/ping" then
         -- Reply with regular text
-       tdcli.sendMessage(msg.chat_id_, msg.id_, 1, '*Pong!*', 1, 'md')
+       tdcli.sendMessage(msg.chat_id_, msg.id_, 1, 'Pong!', 1)
 	   --if msg.content_.text_ == "/id" then
         -- Reply with regular text
 		tdcli.sendText(msg.chat_id_, 0, 1, msg.chat_id_, 1, 'html')
@@ -100,7 +100,7 @@ function tdcli_update_callback(data)
 		elseif input:match('no') then
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '*CloseChat* _Progress Has Been Canceled!_', 1, 'md')
 		elseif input:match('^/id$') then
-			local gpid = '_Chat ID:_ *'..msg.chat_id_..'*\n_Your ID:_ *'..msg.sender_id_..'*'
+			local gpid = '_Chat ID:_ *'..msg.chat_id_..'*\n_Your ID:_ *'..msg.sender_user_id_..'*'
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, gpid, 1, 'md')
 		elseif input:match('^/tosuper') then
 			local gpid = msg.chat_id_
