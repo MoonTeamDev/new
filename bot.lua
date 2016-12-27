@@ -110,7 +110,8 @@ function tdcli_update_callback(data)
 			tdcli.exportChatInviteLink(msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, msg.invite_link_, 1, 'md')
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'lonk :'..ChatInviteLink, 1, 'md')
-			if msg.content_.text_ == "pin" then
+			elseif input:match('^/pin') then
+        local text = input:gsub('/pin', '')
 			tdcli.pinChannelMessage(msg.chat_id_, text)	
 		elseif input:match('^/typing on$') then
 			hash = 'typing:'..msg.chat_id_
