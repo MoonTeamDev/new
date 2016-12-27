@@ -157,7 +157,7 @@ local lfwd = 'lfwd:'..chat_id
 				
 
 		if input:match('^/settings$') then		
-text = '_Settings:_\n______________\n\n*Forward:* _'..lfwd..'_'			
+text = '_Settings:_\n➖➖➖➖➖\n*Forward:* _'..lfwd..'_'			
 tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
