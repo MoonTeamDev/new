@@ -130,22 +130,28 @@ function tdcli_update_callback(data)
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
 			mame:set('lfwd:'..msg.chat_id_, true)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock *Fwd* Has Been Activated_', 1, 'md')
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Activated_', 1, 'md')
 		elseif input:match('/unlock fwd$') and mame:get('lfwd:'..msg.chat_id_) then
 			mame:del('lfwd:'..msg.chat_id_)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock *Fwd* Has Been DeActivated_', 1, 'md')
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been DeActivated_', 1, 'md')
 		elseif mame:get('lfwd:'..chat_id) and msg.forward_info_ then
 			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
 		elseif input:match('^/lock username$') then
-      mame:set('luser:'..msg.chat_id_, true)
-      tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated_', 1, 'md')
-    elseif input:match('^/unlock username$') then
-      mame:del('luser:'..msg.chat_id_)
-      tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been DeActivated_', 1, 'md')
-    
-    elseif input:match('@') and mame:get('luser:'..msg.chat_id_) then
-      --tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
-      tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+                         mame:set('luser:'..msg.chat_id_, true)
+                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated_', 1, 'md')
+                elseif input:match('^/unlock username$') then
+                         mame:del('luser:'..msg.chat_id_)
+                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been DeActivated_', 1, 'md')
+                elseif input:match('@') and mame:get('luser:'..msg.chat_id_) then
+                       tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+			elseif input:match('^/lock tag$') then
+                         mame:set('ltag:'..msg.chat_id_, true)
+                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Tag Has Been Activated_', 1, 'md')
+                elseif input:match('^/unlock tag$') then
+                         mame:del('ltag:'..msg.chat_id_)
+                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Tag Has Been DeActivated_', 1, 'md')
+                elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) then
+                       tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
     end
 		if input:match('^/block') then
 			local id = input:gsub('block', '')
