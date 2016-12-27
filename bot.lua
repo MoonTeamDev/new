@@ -143,16 +143,7 @@ function tdcli_update_callback(data)
 		elseif input:match('^sessions$') then
 			tdcli.getActiveSessions()
 		end
-	--lang system
-		if input:match('^setlang$') then
-				local lang = input:gsub('setlang', '')
-			if lang == 'fa' and not mame:get('lang'..chat_id,true) then
-				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*زبان شما به فارسی تغییر نمود*', 1, 'md')
-				mame:set('lang'..msg.chat_id_,true)
-			elseif lang == 'en' and mame:get('lang'..chat_id,true) then
-				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*Group Language Seted To : [EN]*', 1, 'md')
-				mame:set('lang'..msg.chat_id_,false)
-			end
+	
 				
 -----------------------------------------------------------------------
 --lock username
@@ -200,14 +191,14 @@ function tdcli_update_callback(data)
   end
 				
 
-		if input:match('^settings$') then
-			if mame:get('lfwd:'..msg.chat_id_) then
-				local lock_fwd = 'yes'
-			elseif not mame:get('lfwd:'..msg.chat_id_) then
-				local lock_fwd = 'no'
-			elseif lock_fwd == nil then
-				local lock_fwd = 'undefined'
-			end
+		--if input:match('^settings$') then
+			--if mame:get('lfwd:'..msg.chat_id_) then
+				--local lock_fwd = 'yes'
+			--elseif not mame:get('lfwd:'..msg.chat_id_) then
+				--local lock_fwd = 'no'
+			--elseif lock_fwd == nil then
+				--local lock_fwd = 'undefined'
+			--end
 					
 text = '_Group *'..msg.chat_id_..'* Settings_\n➖➖➖➖➖➖➖➖\n\n*Lock #fwd:*_'..lfwd..'_'			
 tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
