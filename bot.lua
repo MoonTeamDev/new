@@ -151,6 +151,14 @@ function tdcli_update_callback(data)
                          mame:del('ltag:'..msg.chat_id_)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Tag Has Been DeActivated_', 1, 'md')
                 elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) then
+                       tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+			elseif input:match('^/lock link$') then
+                         mame:set('llink:'..msg.chat_id_, true)
+                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Link Has Been Activated_', 1, 'md')
+                elseif input:match('^/unlock link$') then
+                         mame:del('llink:'..msg.chat_id_)
+                         tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Link Has Been DeActivated_', 1, 'md')
+                elseif input:match('https://telegram.me/joinchat/%S+') and mame:get('llink:'..msg.chat_id_) then
                        tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
     end
 		if input:match('^/block') then
