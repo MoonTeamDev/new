@@ -91,9 +91,10 @@ function tdcli_update_callback(data)
     -- If the message is text message
     if msg.content_.ID == "MessageText" then
       -- And content of the text is...
-      if msg.content_.text_ == "ping" then
-        -- Reply with regular text
-        tdcli.sendMessage(msg.chat_id_, msg.id_, 1, 'pong!', 1)
+      if msg.content_.text == "pin" and msg.content_.reply_to_message_id_ ~= 0 then
+tdcli.pinChannelMessage(msg.content_.chat_id_, msg.content_.reply_to_message_id_, 1)
+tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>پیام پین شد</b>', 1, 'html')
+end
 	   --if msg.content_.text_ == "/id" then
         -- Reply with regular text
 		tdcli.sendText(msg.chat_id_, 0, 1, msg.chat_id_, 1, 'html')
@@ -101,9 +102,6 @@ function tdcli_update_callback(data)
         local text = input:gsub('/setname', '')
         --tdcli.changeAccountTtl(text)
 		tdcli.changeChatTitle(msg.chat_id_, text)
-		elseif input:match('^/pin') and msg.content_.reply_to_message_id_ ~= 0 then
-                tdcli.pinChannelMessage(msg.content_.chat_id_, msg.content_.reply_to_message_id_, 1)
-                tdcli.sendMessage(msg.chat_id_, 0, 1, '*Done!*', 1, 'md')
 		elseif input:match('^/creategroup') then
         local text = input:gsub('/creategroup', '')
 		tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, text)
