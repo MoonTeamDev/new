@@ -91,6 +91,9 @@ function tdcli_update_callback(data)
     -- If the message is text message
     if msg.content_.ID == "MessageText" then
       -- And content of the text is..
+	if msg.content_.text_ == "/ping" then
+        -- Reply with regular text
+        tdcli.sendMessage(msg.chat_id_, msg.id_, 1, 'pong', 1)
 	   --if msg.content_.text_ == "/id" then
         -- Reply with regular text
 		tdcli.sendText(msg.chat_id_, 0, 1, msg.chat_id_, 1, 'html')
