@@ -146,53 +146,10 @@ function tdcli_update_callback(data)
 		elseif input:match('^/sessions$') then
 			tdcli.getActiveSessions()
 		end
-	--lang system
-		if input:match('^/setlang$') then
-				local lang = input:gsub('/setlang', '')
-			if lang == 'fa' and not mame:get('lang'..chat_id,true) then
-				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*زبان شما به فارسی تغییر نمود*', 1, 'md')
-				mame:set('lang'..msg.chat_id_,true)
-			elseif lang == 'en' and mame:get('lang'..chat_id,true) then
-				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*Group Language Seted To : [EN]*', 1, 'md')
-				mame:set('lang'..msg.chat_id_,false)
-			end
-				
+	
 -----------------------------------------------------------------------
---lock username
-	--	elseif input:match('lock username$') and mame:get('luser:'..msg.chat_id_) then
-		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Activated :D_', 1, 'md')
-		if input:match('^/lock username$') then
-			mame:set('luser:'..msg.chat_id_, true)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated_', 1, 'md')
-		elseif input:match('^/unlock username$') then
-			mame:del('luser:'..msg.chat_id_)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Deactivated_', 1, 'md')
-		--elseif input:match('unlock username$') and not mame:get('luser:'..msg.chat_id_) then
-		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Deactivated :D_', 1, 'md')
-		elseif input:match('@') and mame:get('luser:'..msg.chat_id_) then
-			--tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
-			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
-		end
-		--elseif input:match('reset lock_username$') then
-		--	mame:set('luser:'..msg.chat_id_)
-		--	tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Username Has Been Reseted :D</i>', 1, 'html')
-		
-		--if redis:get('lock_fwd:'..chat_id) and msg.forward_info_ then
-       -- tdcli.deleteMessages(chat_id, {[0] = msg.id_})
- --     end
---lock #tag
-		if input:match('^/lock tag$') then
-			mame:set('ltag:'..msg.chat_id_, true)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock tag Has Been Activated_', 1, 'md')
-		elseif input:match('^/unlock tag$') then
-			mame:del('ltag:'..msg.chat_id_)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock tag Has Been Deactivated_', 1, 'md')
-		--elseif input:match('unlock username$') and not mame:get('luser:'..msg.chat_id_) then
-		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Deactivated :D_', 1, 'md')
-		elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) then
-			--tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
-			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
-		end
+--lock
+	
 --------------------##############################
 --settings
 		local lfwd = 'lfwd:'..chat_id
@@ -201,24 +158,7 @@ function tdcli_update_callback(data)
    else 
    lfwd = "Unlocked !"
   end
-				local luser = 'luser'..chat_id
-     if mame:get(luser) then
-   luser = "Locked !"
-   else 
-   luser = "Unlocked !"
-  end
-				local luser = 'ltag'..chat_id
-			if mame:get(ltag) then
-   ltag = "Locked !"
-   else 
-   ltag = "Unlocked !"
-  end
-			if mame:get('lang'..chat_id,true) then
-   lang = "فارسی"
-   elseif not mame:get('lang'..chat_id,true) then 
-   lang = "English"
-  end
-		
+				
 
 		if input:match('^/settings$') then
 			--if mame:get('lfwd:'..msg.chat_id_) then
@@ -228,9 +168,8 @@ function tdcli_update_callback(data)
 			--elseif lock_fwd == nil then
 			--	local lock_fwd = 'undefined'
 			--end
-					--🔹 -- Abi
-					--🔸 -- Narenji
-text = '_Group *'..msg.chat_id_..'* Settings__\n*Group Language :*_'..lang..'_\n➖➖➖➖➖➖➖➖\n\n*🔹 Forwarding:* _'..lfwd..'_\n*Username:* _'..luser..'_\n*HashTag:* _'..ltag..'_'			
+					
+text = '_Group '..msg.chat_id_..' Settings_\n______________\n\n*Forward:* _'..lfwd..'_'			
 tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
