@@ -93,7 +93,7 @@ function tdcli_update_callback(data)
       -- And content of the text is...
       if input:match('/pin') and msg.content_.reply_to_message_id_ ~= 0 then
 tdcli.pinChannelMessage(msg.content_.chat_id_, msg.content_.reply_to_message_id_, 1)
-tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>پیام پین شد</b>', 1, 'html')
+tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>done</b>', 1, 'html')
 
 	   --if msg.content_.text_ == "/id" then
         -- Reply with regular text
