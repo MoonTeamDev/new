@@ -170,10 +170,24 @@ local lfwd = 'lfwd:'..chat_id
    else 
    lfwd = "DeActive"
   end
+			
+local luser = 'luser:'..chat_id
+     if mame:get(luser) then
+   luser = "Active"
+   else 
+   luser = "DeActive"
+  end
+			
+local ltag = 'ltag:'..chat_id
+     if mame:get(ltag) then
+   ltag = "Active"
+   else 
+   ltag = "DeActive"
+  end
 				
 
 		if input:match('^/settings$') then		
-text = '_Settings:_\n➖➖➖➖➖\n*Forward:* _'..lfwd..'_'			
+text = '_Settings:_\n➖➖➖➖➖\n*Forward:* _'..lfwd..'_\n*Username(@):* _'..luser..'_\n*Tag(#):* _'..ltag..'_'			
 tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
