@@ -33,6 +33,18 @@ sudo_users = {
   0
 }
 
+function is_mod(msg)
+local var = false
+ -- — Check users id in config
+for v,user in redis:hget('mod'..msg.chat_id_,msg.sender_user_id_) do
+
+ if user == msg.sender_user_id_ then
+ var = true
+ end
+ end
+ return var
+end
+
 -- Print message format. Use serpent for prettier result.
 function vardump(value, depth, key)
   local linePrefix = ''
