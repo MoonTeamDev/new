@@ -18,7 +18,20 @@ serpent = require('serpent')
 redis = require('redis')
 mame = Redis.connect('127.0.0.1', 6379)
 
-
+function is_sudo(msg)
+ local var = false
+--  — Check users id in config
+  for v,user in pairs(sudo_users) do
+  if user == msg.sender_user_id_ then
+     var = true
+ end
+  end
+  return var
+end
+sudo_users = {
+  90285047,
+  0
+}
 
 -- Print message format. Use serpent for prettier result.
 function vardump(value, depth, key)
