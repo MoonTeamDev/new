@@ -142,15 +142,23 @@ function tdcli_update_callback(data)
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_If I,m Creator I,ve Send Gplink On Next Msg_', 1, 'md')
 			tdcli.exportChatInviteLink(msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, msg.invite_link_, 1, 'md')
-			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'lonk :'..ChatInviteLink, 1, 'md')
+			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'Link :'..ChatInviteLink, 1, 'md')
 			elseif input:match('^/promote$') and is_sudo(msg) then
 		local id = input:gsub('/promote', '')
-		text = id..'*Has Been Promoted!*'
+		text = '_User_ *'..id..'* _Has Been Promoted!_'
 		mame:set('mod'..msg.chat_id_,id)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	elseif input:match('^/promote$') and not is_sudo(msg) then
-		text = '*You,re Not Mod Or Sudo*'
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')	
+		text = '*You,re Not Sudo*'
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+				elseif input:match('^/demote$') and is_sudo(msg) then
+		local id = input:gsub('/demote', '')
+		text = '_User_ *'..id..'* _Has Been Promoted!_'
+		mame:del('mod'..msg.chat_id_,id)
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+	elseif input:match('^/demote$') and not is_sudo(msg) then
+		text = '*You,re Not Sudo*'
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
                         elseif input:match('^/typing on$') then
 			hash = 'typing:'..msg.chat_id_
 			mame:set(hash,true)
