@@ -169,6 +169,32 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
+				
+			elseif input:match('^mute sticker') and user_id == mame:get('mod'..msg.chat_id_) then
+		text = '*Sticker Posting Has Been Disallowed*'
+		mame:set('msticker'..msg.chat_id_,true)
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+      elseif input:match('^mute sticker') and not user_id == mame:get('mod'..msg.chat_id_) then
+		text = '*You,re Not Mod Or Higher*'
+		mame:set('msticker'..msg.chat_id_,true)
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+	elseif input:match('$unmute sticker') and user_id == mame:get('mod'..msg.chat_id_) then
+		text = '*Sticker Posting Has Been Allowed*'
+		mame:del('msticker'..msg.chat_id_)
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+	elseif input:match('$unmute sticker') and not user_id == mame:get('mod'..msg.chat_id_) then
+		text = '*You,re Not Mod Or Higher*'
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+	elseif input:match('^+mod$') and is_sudo(msg) then
+		local id = input:gsub('+mod', '')
+		text = id..'*Has Been Promoted !*'
+		mame:set('mods'..msg.chat_id_,id)
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+	elseif input:match('^+mod$') and is_sudo(msg) then
+		text = '*You,re Not Mod Or Higher*'
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+ 	
+				
 		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
 			mame:set('lfwd:'..msg.chat_id_, true)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Activated_', 1, 'md')
