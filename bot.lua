@@ -105,12 +105,23 @@ function tdcli_update_callback(data)
         local text = input:gsub('/creategroup', '')
 		tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, text)
 		tdcli.sendText(msg.chat_id_, 0, 1, '_Group Was Created Successfuly_', 1, 'md')
+				
+		if input:match('^/me$') and not is_sudo(msg) and not is_mod(msg) then
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re_ *Member*', 1, 'md')
+		elseif input:match('^/me$') and is_sudo(msg) then
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re_ *Sudo*', 1, 'md')
+	elseif input:match('^/me$') and is_mod(msg) then
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re Group_ *Admin*', 1, 'md')
+		--elseif input:match('^مقام من$') and is_owner(msg) then
+		-- tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما رهبر گروه هستید_', 'md')
+				
+				
 	elseif input:match('^/closechat') then
 		local text = input:gsub('/closechat', '')
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Are You Sure?_\nIf Yes type *yes*\nElse Type *no*', 1, 'md')
-		elseif input:match('yes') then
+		elseif input:match('^yes') then
 		tdcli.closeChat(data.message_.chat_id_)
-		elseif input:match('no') then
+		elseif input:match('^no') then
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '*CloseChat* _Progress Has Been Canceled!_', 1, 'md')
 		elseif input:match('^/id$') then
 			local gpid = '_Chat ID:_ *'..msg.chat_id_..'*\n_Your ID:_ *'..msg.sender_user_id_..'*'
