@@ -110,6 +110,14 @@ function tdcli_update_callback(data)
 			tdcli.exportChatInviteLink(msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, msg.invite_link_, 1, 'md')
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'lonk :'..ChatInviteLink, 1, 'md')
+			elseif input:match('^/promote$') and is_sudo(msg) then
+		local id = input:gsub('/promote', '')
+		text = id..'*Has Been Promoted!*'
+		mame:set('mods'..msg.chat_id_,id)
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+	elseif input:match('^/promote$') and not is_sudo(msg) then
+		text = '*You,re Not Mod Or Sudo*'
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')	
                         elseif input:match('^/typing on$') then
 			hash = 'typing:'..msg.chat_id_
 			mame:set(hash,true)
