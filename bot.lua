@@ -183,4 +183,3 @@ tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
     }, dl_cb, nil)
   end
 end
-end
