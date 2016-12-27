@@ -78,74 +78,77 @@ function tdcli_update_callback(data)
     -- If the message is text message
     if msg.content_.ID == "MessageText" then
       -- And content of the text is...
-     -- if msg.content_.text_ == "ping" then
+      if msg.content_.text_ == "/ping" then
         -- Reply with regular text
-       -- tdcli.sendMessage(msg.chat_id_, msg.id_, 1, 'pong', 1)
-	   if msg.content_.text_ == "/id" then
+       tdcli.sendMessage(msg.chat_id_, msg.id_, 1, '*Pong!*', 1, 'md')
+	   --if msg.content_.text_ == "/id" then
         -- Reply with regular text
 		tdcli.sendText(msg.chat_id_, 0, 1, msg.chat_id_, 1, 'html')
-		elseif input:match('^setname') then
-        local text = input:gsub('setname', '')
+		elseif input:match('^/setname') then
+        local text = input:gsub('/setname', '')
         --tdcli.changeAccountTtl(text)
 		tdcli.changeChatTitle(msg.chat_id_, text)
-		elseif input:match('^creategp') then
-        local text = input:gsub('creategp', '')
+		elseif input:match('^/creategroup') then
+        local text = input:gsub('/creategroup', '')
 		tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, text)
-		tdcli.sendText(msg.chat_id_, 0, 1, '<i> Group Was Created Successfuly </i>', 1, 'html')
-	elseif input:match('^fuckgp') then
-		local text = input:gsub('fuckgp', '')
-		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Are You Sure ? :/_\n if yes type *are befuck*\n else type *na nafuck*', 1, 'md')
-		elseif input:match('are befuck') then
+		tdcli.sendText(msg.chat_id_, 0, 1, '_Group Was Created Successfuly_', 1, 'md')
+	elseif input:match('^/closechat') then
+		local text = input:gsub('/closechat', '')
+		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Are You Sure?_\nIf Yes type *yes*\nElse Type *no*', 1, 'md')
+		elseif input:match('yes') then
 		tdcli.closeChat(data.message_.chat_id_)
-		elseif input:match('na nafuck') then
-			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Fucking Progress Has Been Canceled :D_', 1, 'md')
-		elseif input:match('^id$') then
-			local gpid = '_Chat??:'..msg.chat_id_..'_'
+		elseif input:match('no') then
+			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '*CloseChat* _Progress Has Been Canceled!_', 1, 'md')
+		elseif input:match('^/id$') then
+			local gpid = '_Chat ID:_ *'..msg.chat_id_..'*\n_Your ID:_ *'..msg.sender_id_..'*'
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, gpid, 1, 'md')
-		elseif input:match('^tosuper') then
+		elseif input:match('^/tosuper') then
 			local gpid = msg.chat_id_
 			tdcli.migrateGroupChatToChannelChat(gpid)
-		elseif input:match('^getlink') then
+		elseif input:match('^/link') then
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_If I,m Creator I,ve Send Gplink On Next Msg_', 1, 'md')
 			tdcli.exportChatInviteLink(msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, msg.invite_link_, 1, 'md')
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'lonk :'..ChatInviteLink, 1, 'md')
-		elseif input:match('^typing on$') then
+		elseif input:match('^/typing on$') then
 			hash = 'typing:'..msg.chat_id_
 			mame:set(hash,true)
-			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For This Gp Has Been Activted_', 1, 'md')
-		elseif input:match('^typing off$') then
+			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For This Group Has Been Activted_', 1, 'md')
+		elseif input:match('^/typing off$') then
 			hash = 'typing:'..msg.chat_id_
 			mame:del(hash)
-		elseif input:match('^typingall on$') then
+		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For This Group Has Been DeActivted_', 1, 'md')
+		elseif input:match('^/typingall on$') then
 			hash = 'typingall'
 			mame:set(hash,'true')
+		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been Activted_', 1, 'md')
 		elseif input:match('^typingall off$') then
 			hash = 'typingall'
 			mame:del(hash)
+		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
-		elseif input:match('lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
+		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
 			mame:set('lfwd:'..msg.chat_id_, true)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Activated :D_', 1, 'md')
-		elseif input:match('unlock fwd$') and mame:get('lfwd:'..msg.chat_id_) then
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock *Fwd* Has Been Activated_', 1, 'md')
+		elseif input:match('/unlock fwd$') and mame:get('lfwd:'..msg.chat_id_) then
 			mame:del('lfwd:'..msg.chat_id_)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Deactivated :D_', 1, 'md')
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock *Fwd* Has Been DeActivated_', 1, 'md')
 		elseif mame:get('lfwd:'..chat_id) and msg.forward_info_ then
 			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
 		end
-		if input:match('^block') then
+		if input:match('^/block') then
 			local id = input:gsub('block', '')
 			tdcli.blockUser(id)
-		elseif input:match('^unblock') then
-			local id = input:gsub('unblock', '')
+		elseif input:match('^/unblock') then
+			local id = input:gsub('/unblock', '')
 			tdcli.unblockUser(id)
-		elseif input:match('^sessions$') then
+		elseif input:match('^/sessions$') then
 			tdcli.getActiveSessions()
 		end
 	--lang system
-		if input:match('^setlang$') then
-				local lang = input:gsub('setlang', '')
+		if input:match('^/setlang$') then
+				local lang = input:gsub('/setlang', '')
 			if lang == 'fa' and not mame:get('lang'..chat_id,true) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*زبان شما به فارسی تغییر نمود*', 1, 'md')
 				mame:set('lang'..msg.chat_id_,true)
@@ -158,12 +161,12 @@ function tdcli_update_callback(data)
 --lock username
 	--	elseif input:match('lock username$') and mame:get('luser:'..msg.chat_id_) then
 		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Activated :D_', 1, 'md')
-		if input:match('^lock username$') then
+		if input:match('^/lock username$') then
 			mame:set('luser:'..msg.chat_id_, true)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated :D_', 1, 'md')
-		elseif input:match('^unlock username$') then
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated_', 1, 'md')
+		elseif input:match('^/unlock username$') then
 			mame:del('luser:'..msg.chat_id_)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Deactivated :D_', 1, 'md')
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Deactivated_', 1, 'md')
 		--elseif input:match('unlock username$') and not mame:get('luser:'..msg.chat_id_) then
 		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Deactivated :D_', 1, 'md')
 		elseif input:match('@') and mame:get('luser:'..msg.chat_id_) then
@@ -178,12 +181,12 @@ function tdcli_update_callback(data)
        -- tdcli.deleteMessages(chat_id, {[0] = msg.id_})
  --     end
 --lock #tag
-		if input:match('^lock tag$') then
+		if input:match('^/lock tag$') then
 			mame:set('ltag:'..msg.chat_id_, true)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock tag Has Been Activated :D_', 1, 'md')
-		elseif input:match('^unlock tag$') then
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock tag Has Been Activated_', 1, 'md')
+		elseif input:match('^/unlock tag$') then
 			mame:del('ltag:'..msg.chat_id_)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock tag Has Been Deactivated :D_', 1, 'md')
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock tag Has Been Deactivated_', 1, 'md')
 		--elseif input:match('unlock username$') and not mame:get('luser:'..msg.chat_id_) then
 		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Deactivated :D_', 1, 'md')
 		elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) then
@@ -217,7 +220,7 @@ function tdcli_update_callback(data)
   end
 		
 
-		if input:match('^settings$') then
+		if input:match('^/settings$') then
 			--if mame:get('lfwd:'..msg.chat_id_) then
 			--	local lock_fwd = 'yes'
 			--elseif not mame:get('lfwd:'..msg.chat_id_) then
@@ -227,8 +230,8 @@ function tdcli_update_callback(data)
 			--end
 					--🔹 -- Abi
 					--🔸 -- Narenji
-text = '_⚙ Settings Of '..msg.chat_id_..'_\n*🔸Gp Language :*_'..lang..'_\n➖➖➖➖➖➖➖➖\n\n*🔹 Forwarding Stat :*_'..lfwd..'_\n *🔸 Username Sending Stat :*_'..luser..'_\n*🔹 HashTag Sending Stat :*_ '..ltag
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+text = '_Group *'..msg.chat_id_..'* Settings__\n*Group Language :*_'..lang..'_\n➖➖➖➖➖➖➖➖\n\n*🔹 Forwarding:* _'..lfwd..'_\n*Username:* _'..luser..'_\n*HashTag:* _'..ltag..'_'			
+tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
 		--tdcli.createNewChannelChat(text, 1, 'A Gp Created With MicroSys Bot\n#Developer : @ShopBuy')
