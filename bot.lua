@@ -209,9 +209,9 @@ tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
         --local text = input:gsub('addme', '')
 		--tdcli.addChatMember(text, msg.sender_user_id_, 20)
       -- And if content of the text is...
-      elseif msg.content_.text_ == "ping" then
+      --elseif msg.content_.text_ == "ping" then
         -- Reply with formatted text
-        tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
+        --tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
 				end
       end
     end
