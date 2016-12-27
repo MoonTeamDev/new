@@ -122,7 +122,7 @@ function tdcli_update_callback(data)
 			hash = 'typingall'
 			mame:set(hash,'true')
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been Activted_', 1, 'md')
-		elseif input:match('^typingall off$') then
+		elseif input:match('^/typingall off$') then
 			hash = 'typingall'
 			mame:del(hash)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
