@@ -231,7 +231,7 @@ function tdcli_update_callback(data)
 					--🔹 -- Abi
 					--🔸 -- Narenji
 text = '_Group *'..msg.chat_id_..'* Settings__\n*Group Language :*_'..lang..'_\n➖➖➖➖➖➖➖➖\n\n*🔹 Forwarding:* _'..lfwd..'_\n*Username:* _'..luser..'_\n*HashTag:* _'..ltag..'_'			
-tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+tdcli.sendMessage(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
 		--tdcli.createNewChannelChat(text, 1, 'A Gp Created With MicroSys Bot\n#Developer : @ShopBuy')
