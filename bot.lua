@@ -97,11 +97,11 @@ function tdcli_update_callback(data)
 	   --if msg.content_.text_ == "/id" then
         -- Reply with regular text
 		tdcli.sendText(msg.chat_id_, 0, 1, msg.chat_id_, 1, 'html')
-		elseif input:match('^/setname') then
+		elseif input:match('^/setname') and is_sudo(msg) then
         local text = input:gsub('/setname', '')
         --tdcli.changeAccountTtl(text)
 		tdcli.changeChatTitle(msg.chat_id_, text)
-		elseif input:match('^/creategroup') then
+		elseif input:match('^/creategroup') and is_sudo(msg) then
         local text = input:gsub('/creategroup', '')
 		tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, text)
 		tdcli.sendText(msg.chat_id_, 0, 1, '_Group Was Created Successfuly_', 1, 'md')
@@ -113,17 +113,17 @@ function tdcli_update_callback(data)
 	--elseif input:match('^/me$') and is_mod(msg) then
 		--tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re Group_ *Admin*', 1, 'md')
 			
-	elseif input:match('^/closechat') then
+	elseif input:match('^/closechat') and is_sudo(msg) then
 		local text = input:gsub('/closechat', '')
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Are You Sure?_\nIf Yes type *yes*\nElse Type *no*', 1, 'md')
-		elseif input:match('^yes') then
+		elseif input:match('^yes') and is_sudo(msg) then
 		tdcli.closeChat(data.message_.chat_id_)
-		elseif input:match('^no') then
+		elseif input:match('^no') and is_sudo(msg) then
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '*CloseChat* _Progress Has Been Canceled!_', 1, 'md')
 		elseif input:match('^/id$') then
 			local gpid = '_Chat ID:_ *'..msg.chat_id_..'*\n_Your ID:_ *'..msg.sender_user_id_..'*'
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, gpid, 1, 'md')
-		elseif input:match('^/tosuper') then
+		elseif input:match('^/tosuper') and is_sudo(msg) then
 			local gpid = msg.chat_id_
 			tdcli.migrateGroupChatToChannelChat(gpid)
 		elseif input:match('^/link') then
@@ -147,19 +147,19 @@ function tdcli_update_callback(data)
 	elseif input:match('^/demote$') and not is_sudo(msg) then
 		text = '*You,re Not Sudo*'
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-                        elseif input:match('^/typing on$') then
+                        elseif input:match('^/typing on$') and is_sudo(msg) then
 			hash = 'typing:'..msg.chat_id_
 			mame:set(hash,true)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For This Group Has Been Activted_', 1, 'md')
-		elseif input:match('^/typing off$') then
+		elseif input:match('^/typing off$') and is_sudo(msg) then
 			hash = 'typing:'..msg.chat_id_
 			mame:del(hash)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For This Group Has Been DeActivted_', 1, 'md')
-		elseif input:match('^/typingall on$') then
+		elseif input:match('^/typingall on$') and is_sudo(msg) then
 			hash = 'typingall'
 			mame:set(hash,'true')
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been Activted_', 1, 'md')
-		elseif input:match('^/typingall off$') then
+		elseif input:match('^/typingall off$') and is_sudo(msg) then
 			hash = 'typingall'
 			mame:del(hash)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
