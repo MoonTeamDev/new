@@ -170,7 +170,7 @@ function tdcli_update_callback(data)
         tdcli.sendMessage(chat_id, msg.id_, 1, '<b>Message Pinned</b>', 1, 'html')
         tdcli.pinChannelMessage(chat_id, reply_id, 1)
 				
-			 input:match("^[#!/][Uu][Nn][Pp][Ii][Nn]") and reply_id then
+			elseif input:match("^[#!/][Uu][Nn][Pp][Ii][Nn]") and reply_id then
         tdcli.sendMessage(chat_id, msg.id_, 1, '<b>Message UnPinned</b>', 1, 'html')
         tdcli.unpinChannelMessage(chat_id, reply_id, 1)
       	
