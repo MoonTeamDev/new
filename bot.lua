@@ -167,7 +167,7 @@ function tdcli_update_callback(data)
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 				
 				elseif input:match('^/setphoto') then
-         		local file = input:match('/setname')
+         		local file = input:match('/setphoto')
                     tdcli.changeChatPhoto(msg.chat_id_, file)
 				
 			elseif input:match('^/help$') then
