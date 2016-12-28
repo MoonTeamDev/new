@@ -168,9 +168,70 @@ function tdcli_update_callback(data)
 				
 			elseif input:match('^/help$') then
 			text = [[*Bot* `Commands:`
-/help
-_Send Bot Commands_]]
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+➖➖➖➖➖
+*/help*
+_Bot Send Bot Commands_
+
+*/ping*
+_If Bot Online, Send_ `PonG!`
+
+*/id*
+_Bot Send You And Group Id_
+
+*/me*
+_Bot Send Your Rank_
+
+*/setname* `[TEXT]`
+_Set Group Name_
+
+*/setphoto*
+_Set Group Photo_
+
+*/closechat*
+_Close This Chat_
+
+*/tosuper*
+_Update Normal To SuperGroup_
+
+*/link*
+_Bot Send Group Link_
+
+*/creategroup* `[TEXT]`
+_Bot Create New Group_
+
+*/promote* `ID|USERNAME|REPLY`
+_Promote User To Group Admin_
+
+*/demote* `ID|USERNAME|REPLY`
+_Demote User From Group Admin_
+
+*/modlist*
+_Bot Send Group Moderators_
+
+*/typing* `ON`
+_Bot Going To Typing Status_
+
+*/typing* `OFF`
+_Bot Going Out From Typing Status_
+
+*/lock* `FWD|USERNAME|TAG|CMD`
+_Bot Deleted This Actions If They are Active_
+
+*/unlock* `FWD|USERNAME|TAG|CMD`
+_Bot Not Deleted This Actions If They are DeActive_
+
+*/ban* `ID|USERNAME|REPLY`
+_Bot Banned User From Group_
+
+*/unban* `ID|USERNAME|REPLY`
+_Bot Unbanned User If Banned_
+
+*/banlist*
+_Bot Send Ban Users List_
+
+*/settings*
+_Bot Send Group Settings_]]
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
 		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
 			mame:set('lfwd:'..msg.chat_id_, true)
