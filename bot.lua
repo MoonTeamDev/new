@@ -235,19 +235,19 @@ function tdcli_update_callback(data)
 *Good Luck* `;D`]]
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
-				elseif input:match('^/mute sticker$') and sender_user_id == mame:get('mod'..msg.chat_id_) then
-		text = '*Sticker Posting Has Been Disallowed*'
+				elseif input:match('^/mute sticker$') and is_sudo(msg) then
+		text = '*Sticker* _Posting Has Been Disallowed_'
 		mame:set('msticker'..msg.chat_id_,true)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-      elseif input:match('^/mute sticker$') and not user_id == mame:get('mod'..msg.chat_id_) then
+      elseif input:match('^/mute sticker$') and not is_sudo(msg) then
 		text = '_You,re Not_ *Mod* _Or_ *Sudo!*'
 		mame:set('msticker'..msg.chat_id_,true)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-	elseif input:match('^/unmute sticker$') and user_id == mame:get('mod'..msg.chat_id_) then
+	elseif input:match('^/unmute sticker$') and is_sudo(msg) then
 		text = '*Sticker Posting Has Been Allowed*'
 		mame:del('msticker'..msg.chat_id_)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-	elseif input:match('^/unmute sticker$') and not user_id == mame:get('mod'..msg.chat_id_) then
+	elseif input:match('^/unmute sticker$') and not is_sudo(msg) then
 		text = '_You,re Not_ *Mod* _Or_ *Sudo!*'
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
