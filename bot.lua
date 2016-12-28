@@ -324,7 +324,7 @@ local lcmd = 'lcmd:'..chat_id
    lcmd = "DeActive"
   end
 
-		if input:match('^/settings$') then		
+		if input:match('^/settings$') and is_sudo(msg) then		
 text = '_Settings:_\n➖➖➖➖➖\n*Forward:* _'..lfwd..'_\n*Username(@):* _'..luser..'_\n*Tag(#):* _'..ltag..'_\n*Cmd:* _'..lcmd..'_'			
 tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
