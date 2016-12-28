@@ -251,37 +251,37 @@ function tdcli_update_callback(data)
 				text = '*You,re Not Mod Or Higher*'
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
-		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
+		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) and is_sudo(msg) then
 			mame:set('lfwd:'..msg.chat_id_, true)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Activated_', 1, 'md')
-		elseif input:match('/unlock fwd$') and mame:get('lfwd:'..msg.chat_id_) then
+		elseif input:match('/unlock fwd$') and mame:get('lfwd:'..msg.chat_id_) and is_sudo(msg) then
 			mame:del('lfwd:'..msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been DeActivated_', 1, 'md')
-		elseif mame:get('lfwd:'..chat_id) and msg.forward_info_ then
+		elseif mame:get('lfwd:'..chat_id) and msg.forward_info_ and not is_sudo(msg) then
 			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
-		elseif input:match('^/lock username$') then
+		elseif input:match('^/lock username$') and is_sudo(msg) then
                          mame:set('luser:'..msg.chat_id_, true)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated_', 1, 'md')
-                elseif input:match('^/unlock username$') then
+                elseif input:match('^/unlock username$') and is_sudo(msg) then
                          mame:del('luser:'..msg.chat_id_)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been DeActivated_', 1, 'md')
-                elseif input:match('@') and mame:get('luser:'..msg.chat_id_) then
+                elseif input:match('@') and mame:get('luser:'..msg.chat_id_) and not is_sudo(msg) then
                        tdcli.deleteMessages(chat_id, {[0] = msg.id_})
-			elseif input:match('^/lock tag$') then
+			elseif input:match('^/lock tag$') and is_sudo(msg) then
                          mame:set('ltag:'..msg.chat_id_, true)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Tag Has Been Activated_', 1, 'md')
-                elseif input:match('^/unlock tag$') then
+                elseif input:match('^/unlock tag$') and is_sudo(msg) then
                          mame:del('ltag:'..msg.chat_id_)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Tag Has Been DeActivated_', 1, 'md')
-                elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) then
+                elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) and not is_sudo(msg) then
                        tdcli.deleteMessages(chat_id, {[0] = msg.id_})
-			elseif input:match('^/lock cmd$') then
+			elseif input:match('^/lock cmd$') and is_sudo(msg) then
                          mame:set('lcmd:'..msg.chat_id_, true)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Cmd Has Been Activated_', 1, 'md')
-                elseif input:match('^/unlock cmd$') then
+                elseif input:match('^/unlock cmd$') and is_sudo(msg) then
                          mame:del('lcmd:'..msg.chat_id_)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Cmd Has Been DeActivated_', 1, 'md')
-                elseif input:match('/') and mame:get('lcmd:'..msg.chat_id_) then
+                elseif input:match('/') and mame:get('lcmd:'..msg.chat_id_) and not is_sudo(msg) then
                        tdcli.deleteMessages(chat_id, {[0] = msg.id_})
 			
     end
