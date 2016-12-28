@@ -167,7 +167,9 @@ function tdcli_update_callback(data)
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 				
 			elseif input:match('^/help$') then
-			text = [[*Bot* `Commands:`\ntest]]
+			text = [[*Bot* `Commands:`
+/help
+_Send Bot Commands_]]
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
 		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
