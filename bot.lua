@@ -235,11 +235,11 @@ function tdcli_update_callback(data)
 *Good Luck* `;D`]]
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
-				elseif input:match('$unmute sticker') and user_id == mame:get('mod'..msg.chat_id_) then
+				elseif input:match('^unmute sticker$') and user_id == mame:get('mod'..msg.chat_id_) then
     text = '*Sticker Posting Has Been Allowed*'
     mame:del('msticker'..msg.chat_id_)
     tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-  elseif input:match('$unmute sticker') and not user_id == mame:get('mod'..msg.chat_id_) then
+  elseif input:match('^unmute sticker$') and not user_id == mame:get('mod'..msg.chat_id_) then
     text = '*You,re Not Mod Or Higher*'
     tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
