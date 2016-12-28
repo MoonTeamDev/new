@@ -147,6 +147,19 @@ function tdcli_update_callback(data)
 	elseif input:match('^/demote$') and not is_sudo(msg) then
 		text = '*You,re Not Sudo*'
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+		mame:set('mods'..msg.chat_id_,id)
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+	elseif input:match('^/promote$') and not is_sudo(msg) then
+		text = '*You,re Not Sudo*'
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+				elseif input:match('^/demote$') and is_sudo(msg) then
+		local id = input:gsub('/demote', '')
+		text = '_User Has Been Demoted As An Admin!_'
+		mame:del('mods'..msg.chat_id_,id)
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+	elseif input:match('^/demote$') and not is_sudo(msg) then
+		text = '*You,re Not Sudo*'
+		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
                         elseif input:match('^/typing on$') and is_sudo(msg) then
 			hash = 'typing:'..msg.chat_id_
 			mame:set(hash,true)
@@ -174,7 +187,35 @@ function tdcli_update_callback(data)
         tdcli.sendMessage(chat_id, msg.id_, 1, '<b>Message UnPinned</b>', 1, 'html')
         tdcli.unpinChannelMessage(chat_id, reply_id, 1)
       	
-			
+			elseif input:match("^[#!/][Ff]wd$") then
+        tdcli.forwardMessages(chat_id, chat_id,{[0] = reply_id}, 0)
+				
+			elseif input:match("^[#!/][Uu]sername") and is_sudo(msg) then
+        tdcli.changeUsername(string.sub(input, 11))
+         tdcli.sendMessage(chat_id, msg.id_, 1,'<b>Username Changed To </b>@'..string.sub(input, 11), 1, 'html')
+      
+		elseif input:match("^[#!/][Ee]cho") then
+        tdcli.sendMessage(chat_id, msg.id_, 1, string.sub(input, 7), 1, 'html')
+      
+		elseif input:match("^[#!/][Ee]dit") then
+        tdcli.editMessageText(chat_id, reply_id, nil, string.sub(input, 7), 'html')
+      
+			elseif input:match("^[#!/][Cc]hangename") and is_sudo(msg) then
+        tdcli.changeName(string.sub(input, 13), nil, 1)
+         tdcli.sendMessage(chat_id, msg.id_, 1,'<b>Bot Name Changed To </b><code>'..string.sub(input, 13)..'</code>', 1, 'html')
+      
+		elseif input:match("^[#!/][Ii]nvite") and is_sudo(msg) then
+        tdcli.addChatMember(chat_id, string.sub(input, 9), 20)
+      
+			elseif input:match("^[#!/][Cc]reatesuper") and is_sudo(msg) then
+        tdcli.createNewChannelChat(string.sub(input, 14), 1, 'My Supergroup, my rules')
+         tdcli.sendMessage(chat_id, msg.id_, 1,'<b>SuperGroup </b>'..string.sub(input, 14)..' <b>Created</b>', 1, 'html')
+      
+			elseif input:match("^[#!/]view") then
+        tdcli.viewMessages(chat_id, {[0] = msg.id_})
+        tdcli.sendMessage(chat_id, msg.id_, 1,'<b>Messages Viewed</b>', 1, 'html')
+      	
+				
 			elseif input:match('^/help$') then
 			text = [[*Bot* `Commands:`
 ➖➖➖➖➖
@@ -190,34 +231,6 @@ function tdcli_update_callback(data)
 */me*
 ➲_Bot Send Your Rank_
 
-*/setname* `[TEXT]`
-➲_Set Group Name_
-
-*/setphoto*
-➲_Set Group Photo_
-
-*/closechat*
-➲_Close This Chat_
-
-*/tosuper*
-➲_Update Normal To SuperGroup_
-
-*/link*
-➲_Bot Send Group Link_
-
-*/creategroup* `[TEXT]`
-➲_Bot Create New Group_
-
-*/promote* `ID|USERNAME|REPLY`
-➲_Promote User To Group Admin_
-
-*/demote* `ID|USERNAME|REPLY`
-➲_Demote User From Group Admin_
-
-*/modlist*
-➲_Bot Send Group Moderators_
-
-*/typing* `ON`
 ➲_Bot Going To Typing Status_
 
 */typing* `OFF`
