@@ -166,7 +166,7 @@ function tdcli_update_callback(data)
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 				
-				elseif msg.content_.text_:match('^/edit') and msg.content_.reply_to_message_id_ ~= 0 then
+				elseif msg.content_.text_:match('^/edit') and msg.content_.reply_to_message_id_ then
         local text = input:gsub('/edit', '')
         
 		tdcli.editMessageText(msg.chat_id_, text)
