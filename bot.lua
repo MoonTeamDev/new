@@ -166,6 +166,10 @@ function tdcli_update_callback(data)
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 				
+				elseif input:match('^/setphoto') then
+        
+		tdcli.changeChatPhoto(msg.chat_id_, file)
+				
 			elseif input:match('^/help$') then
 			text = [[*Bot* `Commands:`
 ➖➖➖➖➖
