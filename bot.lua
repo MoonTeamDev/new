@@ -165,12 +165,7 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
-				
-				elseif msg.content_.text:match('^/pin') and msg.content_.reply_to_message_id_ then
-tdcli.pinChannelMessage(msg.content_.chat_id_, msg.content_.reply_to_message_id_, 1)
-tdcli.sendText(msg.chat_id_, 0, 1, '<b>Done!</b>', 1, 'html')
-
-				
+			
 			elseif input:match('^/help$') then
 			text = [[*Bot* `Commands:`
 ➖➖➖➖➖
@@ -288,14 +283,7 @@ tdcli.sendText(msg.chat_id_, 0, 1, '<b>Done!</b>', 1, 'html')
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Cmd Has Been DeActivated_', 1, 'md')
                 elseif input:match('/') and mame:get('lcmd:'..msg.chat_id_) then
                        tdcli.deleteMessages(chat_id, {[0] = msg.id_})
-		elseif input:match('/lock edit$') and not mame:get('ledit:'..msg.chat_id_) then
-			mame:set('ledit:'..msg.chat_id_, true)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Edit Has Been Activated_', 1, 'md')
-		elseif input:match('/unlock edit$') and mame:get('ledit:'..msg.chat_id_) then
-			mame:del('ledit:'..msg.chat_id_)
-			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Edit Has Been DeActivated_', 1, 'md')
-		elseif mame:get('ledit:'..chat_id) and msg.edit_info_ then
-			tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
+			
     end
 		if input:match('^/block') then
 			local id = input:gsub('block', '')
