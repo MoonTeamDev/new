@@ -202,7 +202,7 @@ function tdcli_update_callback(data)
       
 			elseif input:match("^[#!/][Cc]hangename") and is_sudo(msg) then
         tdcli.changeName(string.sub(input, 13), nil, 1)
-         tdcli.sendText(chat_id, msg.id_, 1,'*Bot Name Changed To *_'..string.sub(input, 13)..'_', 1, 'md')
+         tdcli.sendText(msg.chat_id, msg.id_, 1,'*Bot Name Changed To *_'..string.sub(input, 13)..'_', 1, 'md')
       
 		elseif input:match("^[#!/][Ii]nvite") and is_sudo(msg) then
         tdcli.addChatMember(chat_id, string.sub(input, 9), 20)
