@@ -165,6 +165,16 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
+				
+			elseif input:match('^/setlang$') then
+				local lang = input:gsub('/setlang', '')
+			elseif lang == 'fa' and not mame:get('lang'..chat_id,true) then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '`زبان شما به فارسی تنظیم شد`', 1, 'md')
+				mame:set('lang'..msg.chat_id_,true)
+			elseif lang == 'en' and mame:get('lang'..chat_id,true) then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*Group Language Seted To : [EN]*', 1, 'md')
+				mame:set('lang'..msg.chat_id_,false)	
+				
 		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
 			mame:set('lfwd:'..msg.chat_id_, true)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Activated_', 1, 'md')
