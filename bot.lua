@@ -114,12 +114,12 @@ function tdcli_update_callback(data)
 		tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, text)
 		tdcli.sendText(msg.chat_id_, 0, 1, '_Group Was Created Successfuly_', 1, 'md')
 				
-		elseif input:match('^/me$') and not is_sudo(msg) and not is_mod(msg) then
+		elseif input:match('^/me$') and not is_sudo(msg) then
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re_ *Member*', 1, 'md')
 		elseif input:match('^/me$') and is_sudo(msg) then
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re_ *Sudo*', 1, 'md')
-	elseif input:match('^/me$') and is_mod(msg) then
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re Group_ *Admin*', 1, 'md')
+	--elseif input:match('^/me$') and is_mod(msg) then
+		--tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re Group_ *Admin*', 1, 'md')
 			
 	elseif input:match('^/closechat') then
 		local text = input:gsub('/closechat', '')
@@ -141,7 +141,7 @@ function tdcli_update_callback(data)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'Link :'..ChatInviteLink, 1, 'md')
 			elseif input:match('^/promote$') and is_sudo(msg) then
 		local id = input:gsub('/promote', '')
-		text = '_User_ *'..user_id..'* _Has Been Promoted!_'
+		text = '_User_ *'..msg.to_user_id_..'* _Has Been Promoted!_'
 		mame:set('mods'..msg.chat_id_,id)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	elseif input:match('^/promote$') and not is_sudo(msg) then
@@ -149,7 +149,7 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				elseif input:match('^/demote$') and is_sudo(msg) then
 		local id = input:gsub('/demote', '')
-		text = '_User_ *'..user_id..'* _Has Been Demoted!_'
+		text = '_User_ *'..msg.to_user_id_..'* _Has Been Demoted!_'
 		mame:del('mods'..msg.chat_id_,id)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	elseif input:match('^/demote$') and not is_sudo(msg) then
@@ -173,32 +173,6 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
-				
-			elseif input:match('^mute sticker') and user_id == mame:get('mod'..msg.chat_id_) then
-		text = '*Sticker Posting Has Been Disallowed*'
-		mame:set('msticker'..msg.chat_id_,true)
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-      elseif input:match('^mute sticker') and not user_id == mame:get('mod'..msg.chat_id_) then
-		text = '*You,re Not Mod Or Higher*'
-		mame:set('msticker'..msg.chat_id_,true)
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-	elseif input:match('$unmute sticker') and user_id == mame:get('mod'..msg.chat_id_) then
-		text = '*Sticker Posting Has Been Allowed*'
-		mame:del('msticker'..msg.chat_id_)
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-	elseif input:match('$unmute sticker') and not user_id == mame:get('mod'..msg.chat_id_) then
-		text = '*You,re Not Mod Or Higher*'
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-	elseif input:match('^+mod$') and is_sudo(msg) then
-		local id = input:gsub('+mod', '')
-		text = id..'*Has Been Promoted !*'
-		mame:set('mods'..msg.chat_id_,id)
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-	elseif input:match('^+mod$') and is_sudo(msg) then
-		text = '*You,re Not Mod Or Higher*'
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
- 	
-				
 		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
 			mame:set('lfwd:'..msg.chat_id_, true)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Activated_', 1, 'md')
