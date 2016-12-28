@@ -235,24 +235,6 @@ function tdcli_update_callback(data)
 *Good Luck* `;D`]]
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
-				elseif input:match('^/mute sticker$') and is_sudo(msg) then
-		text = '*Sticker* _Posting Has Been Disallowed_'
-		mame:set('msticker'..msg.chat_id_,true)
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-		elseif mame:get('msticker:'..msg.chat_id,true) and msg.sticker_info_ and not is_sudo(msg) then
-                tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
-      elseif input:match('^/mute sticker$') and not is_sudo(msg) then
-		text = '_You,re Not_ *Mod* _Or_ *Sudo!*'
-		mame:set('msticker'..msg.chat_id_,true)
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-	elseif input:match('^/unmute sticker$') and is_sudo(msg) then
-		text = '*Sticker Posting Has Been Allowed*'
-		mame:del('msticker'..msg.chat_id_)
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-	elseif input:match('^/unmute sticker$') and not is_sudo(msg) then
-		text = '_You,re Not_ *Mod* _Or_ *Sudo!*'
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-				
 		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
 			mame:set('lfwd:'..msg.chat_id_, true)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Activated_', 1, 'md')
@@ -284,7 +266,15 @@ function tdcli_update_callback(data)
                          mame:del('lcmd:'..msg.chat_id_)
                          tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Cmd Has Been DeActivated_', 1, 'md')
                 elseif input:match('/') and mame:get('lcmd:'..msg.chat_id_) then
-                       tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
+                       tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+			elseif input:match('/lock sticker$') and not mame:get('lsticker:'..msg.chat_id_) then
+			mame:set('lsticker:'..msg.chat_id_, true)
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Sticker Has Been Activated_', 1, 'md')
+		elseif input:match('/unlock sticker$') and mame:get('lsticker:'..msg.chat_id_) then
+			mame:del('lsticker:'..msg.chat_id_)
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Sticker Has Been DeActivated_', 1, 'md')
+		elseif mame:get('lsticker:'..chat_id) and msg.sticker_info_ then
+			tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
     end
 		if input:match('^/block') then
 			local id = input:gsub('block', '')
