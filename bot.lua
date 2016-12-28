@@ -168,7 +168,7 @@ function tdcli_update_callback(data)
 				
 				elseif msg.content_.text:match('^/pin') and msg.content_.reply_to_message_id_ then
 tdcli.pinChannelMessage(msg.content_.chat_id_, msg.content_.reply_to_message_id_, 1)
-tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>Done!</b>', 1, 'html')
+tdcli.sendText(msg.chat_id_, 0, 1, '<b>Done!</b>', 1, 'html')
 
 				
 			elseif input:match('^/help$') then
