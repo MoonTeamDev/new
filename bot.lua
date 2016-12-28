@@ -230,7 +230,9 @@ _Bot Unbanned User If Banned_
 _Bot Send Ban Users List_
 
 */settings*
-_Bot Send Group Settings_]]
+_Bot Send Group Settings_
+➖➖➖➖➖
+*Good Luck* `;D`]]
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				
 		elseif input:match('/lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
