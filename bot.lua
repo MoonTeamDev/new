@@ -33,17 +33,6 @@ sudo_users = {
   0
 }
 
-function is_mod(msg)
-local var = false
-
-for k,v in pairs(redis:smembers('mods'..msg.chat_id_,msg.sender_user_id_)) do
-
-if user_id == mods then
-var = true
-end
-end
-return var
-end
 -- Print message format. Use serpent for prettier result.
 function vardump(value, depth, key)
   local linePrefix = ''
@@ -117,12 +106,12 @@ function tdcli_update_callback(data)
 		tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, text)
 		tdcli.sendText(msg.chat_id_, 0, 1, '_Group Was Created Successfuly_', 1, 'md')
 				
-		elseif input:match('^/me$') and not is_sudo(msg) and not is_mod(msg) then
+		elseif input:match('^/me$') and not is_sudo(msg) then
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re_ *Member*', 1, 'md')
 		elseif input:match('^/me$') and is_sudo(msg) then
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re_ *Sudo*', 1, 'md')
-	elseif input:match('^/me$') and is_mod(msg) then
-		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re Group_ *Admin*', 1, 'md')
+	--elseif input:match('^/me$') and is_mod(msg) then
+		--tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_You,re Group_ *Admin*', 1, 'md')
 			
 	elseif input:match('^/closechat') then
 		local text = input:gsub('/closechat', '')
