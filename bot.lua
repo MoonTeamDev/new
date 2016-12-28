@@ -165,6 +165,11 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
+				
+			elseif input:match("^[#!/][Pp][Ii][Nn]") and reply_id then
+        tdcli.sendMessage(chat_id, msg.id_, 1, '<b>Message Pinned</b>', 1, 'html')
+        tdcli.pinChannelMessage(chat_id, reply_id, 1)
+      	
 			
 			elseif input:match('^/help$') then
 			text = [[*Bot* `Commands:`
