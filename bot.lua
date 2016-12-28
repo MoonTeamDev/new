@@ -33,14 +33,6 @@ sudo_users = {
   0
 }
 
-function is_mod(msg)
-local var = false
-if redis:sismember('mod'..msg.chat_id_,msg.sender_user_id_) then
-var = true
-end
-return var
-end
-
 -- Print message format. Use serpent for prettier result.
 function vardump(value, depth, key)
   local linePrefix = ''
@@ -141,7 +133,7 @@ function tdcli_update_callback(data)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'Link :'..ChatInviteLink, 1, 'md')
 			elseif input:match('^/promote$') and is_sudo(msg) then
 		local id = input:gsub('/promote', '')
-		text = '_User_ *'..msg.to_user_id_..'* _Has Been Promoted!_'
+		text = '_User Has Been Promoted As An Admin!_'
 		mame:set('mods'..msg.chat_id_,id)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	elseif input:match('^/promote$') and not is_sudo(msg) then
@@ -149,7 +141,7 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 				elseif input:match('^/demote$') and is_sudo(msg) then
 		local id = input:gsub('/demote', '')
-		text = '_User_ *'..msg.to_user_id_..'* _Has Been Demoted!_'
+		text = '_User Has Been Demoted As An Admin!_'
 		mame:del('mods'..msg.chat_id_,id)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	elseif input:match('^/demote$') and not is_sudo(msg) then
