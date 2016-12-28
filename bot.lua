@@ -239,7 +239,8 @@ function tdcli_update_callback(data)
 		text = '*Sticker* _Posting Has Been Disallowed_'
 		mame:set('msticker'..msg.chat_id_,true)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
-		tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
+		elseif mame:get('msticker:'..msg.chat_id_) then
+                tdcli.deleteMessages(chat_id, {[0] = msg.id_})	
       elseif input:match('^/mute sticker$') and not is_sudo(msg) then
 		text = '_You,re Not_ *Mod* _Or_ *Sudo!*'
 		mame:set('msticker'..msg.chat_id_,true)
