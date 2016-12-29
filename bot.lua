@@ -178,6 +178,17 @@ function tdcli_update_callback(data)
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For All Groups Has Been DeActivted_', 1, 'md')
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
+			elseif input:match('^/add$') and is_sudo(msg) then
+redis:set('add_rem'..msg.chat_id_,true)
+elseif input:match('^/rem$') and is_sudo(msg) then
+redis:del('add_rem'..msg.chat_id_)
+end
+if redis:get('add_rem'..msg.chat_id_) and msg then
+return true
+elseif not redis:get('add_rem'..msg.chat_id_) and msg then
+return false
+end			
+				
 				
 			elseif input:match("^[#!/][Pp][Ii][Nn]") and reply_id then
         tdcli.sendMessage(chat_id, msg.id_, 1, '*Message Pinned*', 1, 'md')
