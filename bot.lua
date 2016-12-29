@@ -182,12 +182,11 @@ function tdcli_update_callback(data)
 redis:set('add_rem'..msg.chat_id_,true)
 elseif input:match('^/rem$') and is_sudo(msg) then
 redis:del('add_rem'..msg.chat_id_)
-end
-if redis:get('add_rem'..msg.chat_id_) and msg then
+
+elseif redis:get('add_rem'..msg.chat_id_) and msg then
 return true
 elseif not redis:get('add_rem'..msg.chat_id_) and msg then
-return false
-end			
+return false		
 				
 				
 			elseif input:match("^[#!/][Pp][Ii][Nn]") and reply_id then
